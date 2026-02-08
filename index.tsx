@@ -1,10 +1,11 @@
-          <FormControl fullWidth size="small" disabled={isZoneTypesLoading || isZoneTypesError}>
+          <FormControl fullWidth size="small" disabled={isZoneTypesLoading || isZoneTypesError} error={Boolean(errors.zoneTypeId)}>
             <InputLabel id="zone-type-label" size="small">
               Zone type
             </InputLabel>
             <Controller
               name="zoneTypeId"
               control={control}
+              rules={{ required: "Zone type is required" }}
               render={({ field }) => (
                 <Select labelId="zone-type-label" label="Zone type" size="small" {...field}>
                   {isZoneTypesLoading ? (
@@ -22,6 +23,7 @@
               )}
             />
             {isZoneTypesError ? <FormHelperText error>Failed to load zone types.</FormHelperText> : null}
+            {errors.zoneTypeId ? <FormHelperText error>{errors.zoneTypeId.message}</FormHelperText> : null}
           </FormControl>
           <Controller
             name="isTrackingEnabled"
